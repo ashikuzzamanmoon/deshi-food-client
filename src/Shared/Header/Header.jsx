@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,13 +8,13 @@ const Header = () => {
     return (
         <div>
             <Navbar bg="light" expand="lg">
-                <Container>
+                <Container className='d-flex'>
                     <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#link">Link</Nav.Link>
+                        <Nav className="ms-auto">
+                            <Link to='/' className='text-black text-decoration-none me-2'>Home</Link>
+                            <Link to='#blog' className='text-black text-decoration-none'>Blog</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
