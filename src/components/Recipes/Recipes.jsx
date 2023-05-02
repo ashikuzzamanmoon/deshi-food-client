@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import RecipesCard from '../RecipesCard/RecipesCard';
+import { BiLike } from 'react-icons/bi';
 
 const Recipes = () => {
     const data = useLoaderData();
@@ -22,7 +23,7 @@ const Recipes = () => {
                         </Card.Text>
                     </Card.Body>
                     <ListGroup className="list-group-flush text-center">
-                        <ListGroup.Item>Likes: {likes}</ListGroup.Item>
+                        <ListGroup.Item> <BiLike></BiLike> Likes: {likes}</ListGroup.Item>
                         <ListGroup.Item>Number of Recipes: {number_of_recipes}</ListGroup.Item>
                         <ListGroup.Item>Years of Experience: {years_of_experience}</ListGroup.Item>
                     </ListGroup>
