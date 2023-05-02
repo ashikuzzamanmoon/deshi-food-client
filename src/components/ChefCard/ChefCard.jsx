@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
 const ChefCard = ({ chefData }) => {
-    const { id, likes, name, years_of_experience, img_url } = chefData;
+    const { id, likes, name, years_of_experience, img_url, number_of_recipes } = chefData;
     return (
         <div className='col col-md-4 col-12'>
             <Card style={{ width: '20rem' }}>
@@ -12,6 +12,7 @@ const ChefCard = ({ chefData }) => {
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
                     <p>Years of experience: {years_of_experience}</p>
+                    <p>Number of recipes: {number_of_recipes}</p>
                     <p>Likes: {likes}</p>
                     <Link to={`/recipes/${id}`}>
                         <Button variant="primary">View Recipe</Button>
