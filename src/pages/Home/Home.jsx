@@ -3,6 +3,7 @@ import Banner from './Banner/Banner';
 import { useLoaderData } from 'react-router-dom';
 import ChefCard from '../../components/ChefCard/ChefCard';
 import FoodCarousel from '../../components/FoodCarousel/FoodCarousel';
+import Categories from '../../components/Categories/Categories';
 
 
 const Home = () => {
@@ -19,8 +20,11 @@ const Home = () => {
                     chefDatas.map(chefData => <ChefCard key={chefData.id} chefData={chefData}></ChefCard>)
                 }
             </div>
-            <div>
+            <div className='my-5'>
                 <FoodCarousel></FoodCarousel>
+            </div>
+            <div className='my-5'>
+                <Categories></Categories>
             </div>
         </div>
     );
