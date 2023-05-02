@@ -9,11 +9,13 @@ const RecipesCard = ({ recipe }) => {
             <Card style={{ width: '21rem' }}>
                 <Card.Img variant="top" src={food_img} style={{height: "220px"}} />
                 <Card.Body>
-                    <Card.Title>{food_name}</Card.Title>
+                    <Card.Title className='fw-semibold'>{food_name}</Card.Title>
                     <Card.Text>
-                        {method}
+                        <p> <span className='fw-semibold'>Cooking Method: </span> {method}</p>
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <p><span className='fw-semibold'>Ingredients: </span>{Ingredients}</p>
+                    <p className='fw-semibold'><span className='fw-semibold'>Rating: </span>{rating}</p>
+                    <Button variant="primary">Favorite</Button>
                 </Card.Body>
             </Card>
         </div>
