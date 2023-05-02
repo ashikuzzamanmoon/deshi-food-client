@@ -4,6 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 import ChefCard from '../../components/ChefCard/ChefCard';
 import FoodCarousel from '../../components/FoodCarousel/FoodCarousel';
 import Categories from '../../components/Categories/Categories';
+import Footer from '../../Shared/Footer/Footer';
 
 
 const Home = () => {
@@ -25,6 +26,9 @@ const Home = () => {
             </div>
             <div className='my-5'>
                 <Categories></Categories>
+            </div>
+            <div>
+                <Footer></Footer>
             </div>
         </div>
     );
