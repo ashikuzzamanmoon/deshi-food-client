@@ -1,0 +1,14 @@
+.active{
+    text-decoration: none;
+    color: red;
+    margin: 0 20px;
+    font-weight: 600;
+}
+
+.default{
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+   
+
+}
