@@ -1,11 +1,30 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import app from '../../firebase/firebase.init';
+
+const auth = getAuth(app);
 
 const Login = () => {
-    // const auth = getAuth();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password. value;
+        console.log(email, password);
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    }
+    
     return (
         <div className='d-flex align-items-center justify-content-center'>
             <div className='border w-75 shadow pb-5 m-5'>
@@ -14,7 +33,7 @@ const Login = () => {
                     <p>Hey, Enter your details to get sign in to your account</p>
                 </div>
                 <div className='d-flex align-items-center justify-content-center'>
-                    <Form className='w-50'>
+                    <Form onSubmit={handleSubmit} className='w-50'>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" name='email' />

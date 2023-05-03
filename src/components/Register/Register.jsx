@@ -1,9 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import app from '../../firebase/firebase.init';
+
+const auth = getAuth(app);
 
 const Register = () => {
+    const [error, setError] = useState('');
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                setError('');
+                form.reset();
+            })
+            .catch(error => {
+                console.error(error.message);
+                setError(error.message);
+            })
+    }
+
     return (
         <div className='d-flex align-items-center justify-content-center'>
             <div className='border w-75 shadow pb-5 m-5'>
@@ -12,23 +37,23 @@ const Register = () => {
                     <p>Hey, Enter your details to get sign in to your account</p>
                 </div>
                 <div className='d-flex align-items-center justify-content-center'>
-                    <Form className='w-50'>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form onSubmit={handleSubmit} className='w-50'>
+                        <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label>Name</Form.Label>
                             <Form.Control type="email" placeholder="Enter name" name='name' />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Group className="mb-3" controlId="formBasicPhoto">
                             <Form.Label>Photo URL</Form.Label>
                             <Form.Control type="email" placeholder="Enter photo url" name='photo' />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" name='email' />
+                            <Form.Control type="email" placeholder="Enter email" name='email' required />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name='password' />
+                            <Form.Control type="password" placeholder="Password" name='password' required />
                         </Form.Group>
                         <div className='d-flex justify-content-center align-items-center'>
                             <Button variant="primary" type="submit" className='w-100'>
@@ -47,6 +72,7 @@ const Register = () => {
                 <div className='text-center mt-5'>
                     <p className='fw-semibold'>Already have an account? Please <Link to="/login">Log in</Link> </p>
                 </div>
+                <p className='text-danger text-center'>{error}</p>
             </div>
         </div>
     );
