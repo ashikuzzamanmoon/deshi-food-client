@@ -1,30 +1,48 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import app from '../../firebase/firebase.init';
+import { AuthContext } from '../Authentication/AuthProvider';
 
 const auth = getAuth(app);
 
 const Login = () => {
+    const { loginUser } = useContext(AuthContext);
+    const [success, setSuccess] = useState('')
+    const [error, setError] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state?.from?.pathname || '/';
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
-        const password = form.password. value;
+        const password = form.password.value;
         console.log(email, password);
-
-        createUserWithEmailAndPassword(auth, email, password)
-        .then(result => {
-            const loggedUser = result.user;
-            console.log(loggedUser);
-        })
-        .catch(error => {
-            console.error(error);
-        })
+        if (!/(?=.[0-9].[0-9])/.test(password)) {
+            return setError(" Ensure string has two digits")
+        }
+        else if (password.length < 6) {
+            return setError("Ensure Password length is 6");
+        }
+        setSuccess('')
+        setError('');
+        loginUser(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                setError('')
+                setSuccess("Successfully Login !")
+                navigate(from, { replace: true });
+                form.reset()
+            })
+            .catch(error => {
+                setError(error.message);
+            })
     }
-    
+
     return (
         <div className='d-flex align-items-center justify-content-center'>
             <div className='border w-75 shadow pb-5 m-5'>
@@ -60,6 +78,8 @@ const Login = () => {
                 <div className='text-center mt-5'>
                     <p className='fw-semibold'>Don't have an account? Please <Link to="/register">Register</Link> </p>
                 </div>
+                <p className='text-danger text-center'>{success}</p>
+                <p className='text-danger text-center'>{error}</p>
             </div>
         </div>
     );

@@ -1,10 +1,17 @@
+import ReactPDF from '@react-pdf/renderer';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { FaDownload } from 'react-icons/fa';
+
 
 const Blog = () => {
     return (
-        <div className='container my-5'>
+        <div className='container my-4'>
+            <div className='text-center mb-4'>
+                {/* <ReactPDF></ReactPDF> */}
+                <button className='btn btn-primary'>Download PDF <FaDownload /> </button>
+            </div>
             <Card className=''>
                 <Card.Body>
                     <Card.Title>1. Tell us the differences between uncontrolled and controlled components.</Card.Title>

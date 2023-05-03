@@ -1,41 +1,61 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { Link, useNavigate, useNavigation } from 'react-router-dom';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
 import app from '../../firebase/firebase.init';
+import { AuthContext } from '../Authentication/AuthProvider';
 
 const auth = getAuth(app);
 
 const Register = () => {
     const googleProvider = new GoogleAuthProvider();
-
-    const handleGoogleSignIn = () => {
-        console.log('google mama');
-    }
-
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const { userCreate, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
+        const name = form.name.value;
+        const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
-
-        createUserWithEmailAndPassword(auth, email, password)
+        if (!/(?=.[0-9].[0-9])/.test(password)) {
+            return setError(" Ensure string has two digits")
+        }
+        else if (password.length < 6) {
+            return setError("Ensure Password length is 6");
+        }
+        setError('')
+        setSuccess('')
+        userCreate(email, password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
                 setError('');
+                setSuccess("Successfully Login !")
+                updateUserProfileInfo(loggedUser, name, photo)
                 form.reset();
+                logOut();
+                navigate('/login')
             })
             .catch(error => {
                 console.error(error.message);
                 setError(error.message);
             })
     }
-
+    const updateUserProfileInfo = (currentUser, name, photo) => {
+        updateProfile(currentUser, {
+            displayName: name,
+            photoURL: photo,
+        })
+    }
+    const handleGoogleSignIn = () => {
+        console.log('google mama');
+    }
     return (
         <div className='d-flex align-items-center justify-content-center'>
             <div className='border w-75 shadow pb-5 m-5'>
@@ -47,11 +67,11 @@ const Register = () => {
                     <Form onSubmit={handleSubmit} className='w-50'>
                         <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="email" placeholder="Enter name" name='name' />
+                            <Form.Control type="text" required placeholder="Enter name" name='name' />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPhoto">
                             <Form.Label>Photo URL</Form.Label>
-                            <Form.Control type="email" placeholder="Enter photo url" name='photo' />
+                            <Form.Control type="text" required placeholder="Enter photo url" name='photo' />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
@@ -80,6 +100,7 @@ const Register = () => {
                     <p className='fw-semibold'>Already have an account? Please <Link to="/login">Log in</Link> </p>
                 </div>
                 <p className='text-danger text-center'>{error}</p>
+                <p className='text-danger text-center'>{success}</p>
             </div>
         </div>
     );
