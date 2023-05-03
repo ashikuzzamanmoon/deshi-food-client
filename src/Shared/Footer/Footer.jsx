@@ -4,7 +4,7 @@ import { AiFillFacebook, AiFillTwitterSquare, AiFillInstagram } from 'react-icon
 
 const Footer = () => {
     return (
-        <div>
+        <div className='mt-5'>
             <footer className="bg-dark text-white py-5">
                 <Container>
                     <Row>
@@ -23,8 +23,8 @@ const Footer = () => {
                         <Col md={3}>
                             <h5>Contact Us</h5>
                             <address>
-                                <p>1234 Main Street</p>
-                                <p>Anytown, USA 12345</p>
+                                <p>Asfia Tower, Rd No. 11</p>
+                                <p>Dhaka 1213, Bangladesh</p>
                                 <p>Phone: (555) 555-1212</p>
                             </address>
                         </Col>

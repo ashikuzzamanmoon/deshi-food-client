@@ -6,10 +6,13 @@ import {
 import Main from "../layouts/Main";
 import Home from "../pages/Home/Home";
 import Recipes from "../components/Recipes/Recipes";
+import Blog from "../components/Blog/Blog";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 const router = createBrowserRouter([
     {
       path: "/",
       element:<Main></Main>,
+      errorElement: <ErrorPage></ErrorPage>,
       children:[
         {
             path:'/',
@@ -20,6 +23,10 @@ const router = createBrowserRouter([
           path: '/recipes/:id',
           element: <Recipes></Recipes>,
           loader: ({params}) => fetch(`http://localhost:5000/chef/${params.id}`)
+        },
+        {
+          path: '/blog',
+          element: <Blog></Blog>
         }
       ]
     }

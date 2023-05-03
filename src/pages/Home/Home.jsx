@@ -27,9 +27,6 @@ const Home = () => {
             <div className='my-5'>
                 <Categories></Categories>
             </div>
-            <div>
-                <Footer></Footer>
-            </div>
         </div>
     );
 };
