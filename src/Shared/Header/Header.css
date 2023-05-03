@@ -1,7 +1,7 @@
 .active{
     text-decoration: none;
     color: red;
-    margin: 0 20px;
+    margin: 0 10px;
     font-weight: 600;
 }
 
@@ -9,6 +9,7 @@
     text-decoration: none;
     color: black;
     font-weight: 600;
+    margin: 0 10px;
    
 
 }
