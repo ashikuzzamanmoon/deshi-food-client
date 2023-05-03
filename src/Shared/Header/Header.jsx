@@ -28,11 +28,11 @@ const Header = () => {
                             <NavLink to='/blog' className={({ isActive }) => (isActive ? 'active' : 'default')}>Blog</NavLink>
 
                             {
-                                user && <img src={user?.photoURL} width={'30px'} className='rounded-circle' height={'30px'} alt="" srcset="" />
+                                user && <img src={user?.photoURL} width={'30px'} className='rounded-circle me-4' height={'30px'} alt="" srcset="" />
                             }
                             {
-                                user ? <Button onClick={handleSignOut} variant='success'>Logout</Button> :
-                                    <NavLink to='/login' className={({ isActive }) => (isActive ? 'active' : 'default')}>Login</NavLink>
+                                user ? <Button onClick={handleSignOut} variant='primary'>Logout</Button> :
+                                <Button variant='primary'><Link to='/login' className='text-white text-decoration-none'>Login</Link></Button>
                             }
                         </Nav>
                     </Navbar.Collapse>
