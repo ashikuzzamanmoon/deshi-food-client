@@ -6,6 +6,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import './Header.css';
 import { AuthContext } from '../../components/Authentication/AuthProvider';
 import { Button } from 'react-bootstrap';
+import "react-tooltip/dist/react-tooltip.css";
+// import "./styles.css";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -28,7 +31,11 @@ const Header = () => {
                             <NavLink to='/blog' className={({ isActive }) => (isActive ? 'active' : 'default')}>Blog</NavLink>
 
                             {
-                                user && <img src={user?.photoURL} width={'30px'} className='rounded-circle me-4' height={'30px'} alt="" srcset="" />
+                                user && 
+                                <div className="">
+                                    <img src={user?.photoURL} width={'30px'} id="title" className='rounded-circle m-2' height={'30px'} alt="" />
+                                    <ReactTooltip anchorId="title" place='bottom' content={user?.displayName}></ReactTooltip>
+                                </div>
                             }
                             {
                                 user ? <Button onClick={handleSignOut} variant='primary'>Logout</Button> :

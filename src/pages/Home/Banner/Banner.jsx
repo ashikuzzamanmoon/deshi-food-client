@@ -4,7 +4,7 @@ const Banner = () => {
     return (
         <div className='my-5 d-flex flex-column flex-md-row align-items-center'>
             <div>
-                <img src="https://i.ibb.co/SvXZ2FK/food-banner.png" alt="" />
+                <img src="https://i.ibb.co/SvXZ2FK/food-banner.png" alt="" className='img-fluid' />
             </div>
             <div>
                 <h2 className='fs-1 fw-bold mx-4'>

@@ -60,7 +60,7 @@ const FoodCarousel = () => {
                 <Carousel.Item>
                     <img
                         className="d-block w-100 rounded" style={{height: "400px"}}
-                        src="https://img.freepik.com/free-photo/refreshing-summer-cocktail-wooden-table-generative-ai_188544-12295.jpg?w=360&t=st=1683063465~exp=1683064065~hmac=16324b6274bf2b0997fbc94a184a51dfba990d0d7e3e1a250ea7aa6e318acaf6"
+                        src="https://img.freepik.com/free-photo/four-different-cocktail-smoothies-with-milky-cream-top_114579-1097.jpg?w=740&t=st=1683185006~exp=1683185606~hmac=6ff32c1adaec597046df12c72fbb1f98c9b8a119bdfff4ad11543831b958ded3"
                         alt="Fifth slide"
                     />
                     <Carousel.Caption>

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { AiFillFacebook, AiFillTwitterSquare, AiFillInstagram } from 'react-icons/ai';
-
+import './footer.css'
 const Footer = () => {
     return (
-        <div className='mt-5'>
+        <div className='mt-5 fo'>
             <footer className="bg-dark text-white py-5">
                 <Container>
-                    <Row>
+                    <Row className='ms-2'>
                         <Col md={3}>
                             <h5>About Us</h5>
                             <p>We are a team of food enthusiasts who love to share our passion for cooking and eating with others.</p>
